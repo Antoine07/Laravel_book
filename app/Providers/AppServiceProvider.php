@@ -19,9 +19,9 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Validator::extend('uniqueVoteIp', function ($attribute, $value, $parameters, $validator) {
-            
+
             $count = Score::where('book_id', $value)->where('ip', $parameters[0])->count();
-                                        
+
             return $count === 0;
         });
     }

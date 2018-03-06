@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"><a href="{{url('/')}}">Aucceil</a></span>
+                <span class="icon-bar"><a href="{{route('home')}}">Aucceil</a></span>
                 @if(Route::is('book.*') == false)
                 @forelse($genres as $id => $name)
                 <span class="icon-bar"><a href="{{url('genre', $id)}}">{{$name}}</a></span>
@@ -15,10 +15,10 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{url('/')}}">Aucceil</a></li>
+                <li class="active"><a href="{{route('home')}}">Aucceil</a></li>
                 @if(Route::is('book.*') == false)
                 @forelse($genres as $id => $name)
-                <li ><a href="{{url('genre', $id)}}">{{$name}}</a></li>
+                <li ><a href="{{route('genre_book', $id)}}">{{$name}}</a></li>
                 @empty 
                 <li>Aucun genre pour l'instant</li>
                 @endforelse

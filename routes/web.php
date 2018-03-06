@@ -15,16 +15,14 @@
 
 Route::get('/', 'FrontController@index')->name('home');
 // route pour afficher un livre, route sécurisée
-Route::get('book/{id}', 'FrontController@show');
-
-// retourne une resource en fonction de son id
-Route::get('book/{id}', 'FrontController@show');
+Route::get('book/{id}', 'FrontController@show')->name('book_front');
 
 //afficher tous les livres d'un auteur 
-Route::get('author/{id}', 'FrontController@showBookByAuthor');
+Route::get('author/{id}', 'FrontController@showBookByAuthor')->name('author_book');
 
 // pour afficher tous les livres associés à un genre
-Route::get('genre/{id}', 'FrontController@showBookByGenre');
+Route::get('genre/{id}', 'FrontController@showBookByGenre')->name('genre_book');
+
 
 Auth::routes();
 
@@ -34,8 +32,6 @@ Route::resource('admin/book', 'BookController')->middleware('auth');
 
 
 Route::post('vote', 'FrontController@create')->name('vote');
-
-
 
 
 

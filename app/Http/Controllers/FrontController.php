@@ -23,15 +23,17 @@ class FrontController extends Controller
     }
 
     public function index(){
-        
+
+        // mise en cache de la pagination
         $prefix = request()->page?? '1';
         $key = 'book' . $prefix;
 
-        $books = Cache::remember($key, 1 ,function(){
+        $minutes = 60;
+        $books = Cache::remember($key, $minutes ,function(){
             return Book::published()->with('picture', 'authors')->paginate($this->paginate); // pagination
         });
 
-        return view('front.index', ['books' => $books]);
+        return view('front.index', compact('books'));
 
     }
 
@@ -45,16 +47,16 @@ class FrontController extends Controller
         $lock = $ips->search($clientIp)? true : false;
 
         // que vous passez à la vue
-        return view('front.show', ['book' => $book, 'lock' => $lock]);
+        return view('front.show', compact('book', 'lock'));
     }
 
     public function showBookByAuthor(int $id){
 
         $author= Author::find($id); // récupérez les informations liés à l'auteur
-        $books = $author->books()->paginate($this->paginate); // on récupère tous les livres d'un auteur
+        $books = $author->books()->published()->paginate($this->paginate); // on récupère tous les livres d'un auteur
 
         // On passe les livres et le nom de l'auteur
-        return view('front.author', ['books' => $books, 'author' => $author]);
+        return view('front.author', compact('books', 'author'));
 
     }
 
@@ -62,13 +64,13 @@ class FrontController extends Controller
         // on récupère le modèle genre.id 
         $genre = Genre::find($id);
 
-        $books = $genre->books()->paginate($this->paginate);
+        $books = $genre->books()->published()->paginate($this->paginate);
 
         return view('front.genre', ['books' => $books, 'genre' => $genre]);
     }
 
     public function create(Request $request){
-        
+
         $this->validate($request, [
             'ip' => 'ipv4',
             'book_id' => "integer|required|uniqueVoteIp:{$request->ip}",

@@ -3,7 +3,7 @@
 @section('content')
 <article class="row">
     <div class="col-md-12">
-    @if($book)
+    @if(!is_null($book))
     <h1>{{$book->title}}</h1>
     @if(!empty($book->picture))
         <div class="col-xs-6 col-md-12">

@@ -21,7 +21,6 @@ class Book extends Model
 
             $this->attributes['genre_id'] = $value;
         }
-
     }
 
     public function scopePublished($query){

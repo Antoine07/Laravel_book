@@ -40,3 +40,11 @@
 {{$books->links()}}
 @endsection
 
+@section('note')
+@parent
+Je suis un complément à la note précédente ...
+@endsection
+
+
+
+

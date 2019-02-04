@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book</title>
+    <title>@yield('title')</title>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
 </head>
 <body>
@@ -22,6 +22,10 @@
 </div>
 @section('scripts')
 <script src="{{asset('js/app.js')}}"></script>
+@show
+
+@section('note')
+Je suis un première note
 @show
 </body>
 </html>
